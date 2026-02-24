@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YourFav Florist - Toko Buket Bunga Handmade</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#"><i class="bi bi-flower1 text-pink"></i> YourFav Florist</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#produk">Produk</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#form">Tambah Bunga</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-section text-white text-center py-5" id="home" style="background-image: url('assets/background.jpg'); background-size: cover; background-position: center;">
+        <div class="container">
+            <h1 class="display-5 fw-bold mb-3">YourFav Florist</h1>
+            <p class="lead">Toko Buket Bunga Kawat Bulu Handmade</p>
+        </div>
+    </div>
+
+    <div class="container my-5" id="statistik">
+        <h2 class="text-center fw-bold text-pink mb-4">Statistik Toko</h2>
+        <div class="row g-3">
+            <div class="col-md-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <h5 class="mt-3">Total Produk</h5>
+                        <h2 class="text-pink fw-bold">45</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <h5 class="mt-3">Stok Tersedia</h5>
+                        <h2 class="text-pink fw-bold">250</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <h5 class="mt-3">Kategori</h5>
+                        <h2 class="text-pink fw-bold">8</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-light py-5" id="produk">
+        <div class="container">
+            <h2 class="text-center fw-bold text-pink mb-4">Koleksi Buket Bunga</h2>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img src="assets/Buket Romantis Pink.jpg" class="card-img-top" alt="Buket Romantis Pink" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Buket Romantis Pink</h5>
+                            <p class="card-text small">Rangkaian bunga premium warna pink</p>
+                            <p class="text-pink fw-bold">Rp 350.000</p>
+                            <p class="small">Stok: 15</p>
+                            <button class="btn btn-pink w-100" onclick="scrollToForm()">Edit</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img src="assets/Buket Elegan Ungu.jpg" class="card-img-top" alt="Buket Elegan Ungu" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Buket Elegan Ungu</h5>
+                            <p class="card-text small">Bunga ungu mewah dengan sentuhan putih</p>
+                            <p class="text-pink fw-bold">Rp 425.000</p>
+                            <p class="small">Stok: 12</p>
+                            <button class="btn btn-pink w-100" onclick="scrollToForm()">Edit</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img src="assets/Buket Passion Merah.jpg" class="card-img-top" alt="Buket Passion Merah" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Buket Passion Merah</h5>
+                            <p class="card-text small">Bunga merah segar untuk momen spesial</p>
+                            <p class="text-pink fw-bold">Rp 400.000</p>
+                            <p class="small">Stok: 18</p>
+                            <button class="btn btn-pink w-100" onclick="scrollToForm()">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-5" id="form">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center fw-bold text-pink mb-4">Form Tambah Produk Baru</h2>
+                <div class="card">
+                    <div class="card-body">
+                        <form onsubmit="submitForm(event)">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Nama Buket</label>
+                                <input type="text" class="form-control" id="nama" placeholder="Masukkan nama buket baru" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Harga (Rp)</label>
+                                <input type="text" class="form-control" id="harga" placeholder="Masukkan harga" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Stok</label>
+                                <input type="number" class="form-control" id="stok" placeholder="Masukkan jumlah stok" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Kategori</label>
+                                <select class="form-select" id="kategori" required>
+                                    <option value="">-- Pilih Kategori --</option>
+                                    <option value="Romantis">Buket Bunga</option>
+                                    <option value="Perhiasan">Buket Meja</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-pink w-100 fw-bold">Tambah Produk</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-pink text-white text-center py-4 mt-5">
+        <p class="mb-0"><strong>YourFav Florist © 2026</strong></p>
+        <p class="small">Toko Buket Bunga Kawat Bulu Handmade</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function submitForm(e) {
+            e.preventDefault();
+            document.querySelector('form').reset();
+        }
+        
+        function scrollToForm() {
+            document.getElementById('form').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
