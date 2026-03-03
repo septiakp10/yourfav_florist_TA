@@ -1,170 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
 
+/* ==========================================
+   CSS VARIABLES (Light Mode Default)
+   ========================================== */
 :root {
     --primary-pink: #CF7486;
-    --light-pink: #FFCEED;
-    --dark-pink: #B85A70;
+    --light-pink:   #FFCEED;
+    --dark-pink:    #B85A70;
+
+    --bg-primary:   #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-card:      #ffffff;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --border-color: #e0e0e0;
+    --shadow-color: rgba(0,0,0,0.08);
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ==========================================
+   DARK MODE – hanya ubah variable
+   ========================================== */
+body.dark-mode {
+    --bg-primary:   #121212;
+    --bg-secondary: #1a1a1a;
+    --bg-card:      #2a2a2a;
+    --text-primary: #f0f0f0;
+    --text-secondary: #b0b0b0;
+    --border-color: #444444;
+    --shadow-color: rgba(0,0,0,0.3);
 }
+
+/* ==========================================
+   BASE
+   ========================================== */
+*, *::before, *::after { box-sizing: border-box; }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa;
-    color: #333;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin: 0;
 }
 
-html {
-    scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
-.text-pink {
-    color: var(--primary-pink) !important;
-}
+h1, h2, h3, h4, h5, h6 { color: var(--text-primary); }
 
-.bg-pink {
-    background-color: var(--primary-pink) !important;
-}
+/* ==========================================
+   BRAND HELPERS
+   ========================================== */
+.text-pink  { color: var(--primary-pink) !important; }
+.bg-pink    { background-color: var(--primary-pink) !important; }
 
 .btn-pink {
     background-color: var(--primary-pink);
     border-color: var(--primary-pink);
-    color: white;
+    color: #fff;
     font-weight: 600;
+    transition: 0.25s;
 }
-
 .btn-pink:hover {
     background-color: var(--dark-pink);
     border-color: var(--dark-pink);
-    color: white;
+    color: #fff;
 }
 
+/* ==========================================
+   NAVBAR
+   ========================================== */
 .navbar {
-    border-bottom: 1px solid #e0e0e0;
+    background-color: var(--bg-primary) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    transition: background-color 0.3s, border-color 0.3s;
 }
-
 .navbar-brand {
     font-size: 1.4rem;
     font-weight: 700;
+    color: var(--text-primary);
 }
-
 .nav-link {
     font-weight: 500;
-    color: #333 !important;
-    margin: 0 5px;
+    color: var(--text-primary) !important;
+    transition: color 0.2s;
 }
+.nav-link:hover { color: var(--primary-pink) !important; }
 
-.nav-link:hover {
-    color: var(--primary-pink) !important;
-}
+#themeToggle { transition: transform 0.3s; }
+#themeToggle:hover { transform: rotate(20deg); }
 
+/* ==========================================
+   HERO
+   ========================================== */
 .hero-section {
-    background: linear-gradient(135deg, var(--light-pink), var(--primary-pink));
-    color: white;
-    padding: 120px 20px;
-    position: relative;
-    min-height: 500px;
+    min-height: 420px;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.hero-section::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
-    z-index: 0;
-}
-
-.hero-section > div {
     position: relative;
+    overflow: hidden;
+    background-image: url('../assets/background.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
     z-index: 1;
 }
 
-.hero-section h1 {
-    font-size: 2.5rem;
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 80px 20px;
+}
+
+/* "YourFav" — serif tebal putih seperti di gambar */
+.hero-title {
+    font-family: 'Playfair Display', serif;
     font-weight: 700;
-    margin-bottom: 15px;
+    font-style: normal;
+    font-size: clamp(3rem, 9vw, 5.5rem);
+    line-height: 1.05;
+    color: #fff;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.35);
+    margin-bottom: 12px;
 }
 
-.hero-section .lead {
-    font-size: 1.3rem;
+/* "Florist" — miring + warna pink muda seperti di gambar */
+.hero-title-florist {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--light-pink);
 }
 
+.hero-subtitle {
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.03em;
+}
+
+/* ==========================================
+   CARDS
+   ========================================== */
 .card {
-    border: 1px solid #e0e0e0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: 0.3s;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    box-shadow: 0 2px 8px var(--shadow-color);
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s, border-color 0.3s;
+    border-radius: 12px;
+    overflow: hidden;
 }
-
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.2);
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(207,116,134,0.25);
 }
-
 .card-img-top {
     border-bottom: 3px solid var(--light-pink);
+    object-fit: cover;
+}
+.card-text { color: var(--text-secondary); }
+
+/* ==========================================
+   PRODUCT ACTION BUTTONS
+   ========================================== */
+.btn-detail {
+    font-weight: 600;
+    transition: 0.25s;
+}
+.btn-detail:disabled,
+.btn-detail.disabled {
+    background-color: #ccc !important;
+    border-color: #ccc !important;
+    color: #666 !important;
+    cursor: not-allowed;
+    opacity: 0.65;
 }
 
+.btn-wishlist {
+    font-weight: 500;
+    border-color: var(--primary-pink);
+    color: var(--primary-pink);
+    transition: 0.25s;
+}
+.btn-wishlist:hover,
+.btn-wishlist.active {
+    background-color: var(--primary-pink);
+    color: #fff;
+    border-color: var(--primary-pink);
+}
+
+/* ==========================================
+   BADGE
+   ========================================== */
+.badge {
+    font-size: 0.7rem;
+    padding: 0.3em 0.5em;
+    border-radius: 50%;
+    min-width: 18px;
+    text-align: center;
+}
+
+/* ==========================================
+   FORM
+   ========================================== */
 .form-label {
     font-weight: 600;
-    color: #333;
+    color: var(--text-primary) !important;
+    display: block;
+    margin-bottom: 0.4rem;
 }
-
 .form-control,
 .form-select {
-    border: 1px solid #ddd;
-    padding: 10px 12px;
-    font-size: 1rem;
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
-
 .form-control:focus,
 .form-select:focus {
     border-color: var(--primary-pink);
-    box-shadow: 0 0 0 0.2rem rgba(255, 105, 180, 0.25);
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    box-shadow: 0 0 0 0.2rem rgba(207,116,134,0.25);
 }
+.form-control::placeholder { color: #aaa; }
 
+/* ==========================================
+   MODAL
+   ========================================== */
+.modal-content {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+.modal-header {
+    background-color: var(--bg-card);
+    border-bottom: 2px solid var(--primary-pink);
+}
+.modal-footer {
+    background-color: var(--bg-card);
+    border-top: 1px solid var(--border-color);
+}
+.list-group-item {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+    transition: background-color 0.2s;
+}
+.list-group-item:hover { background-color: var(--bg-secondary); }
+
+body.dark-mode .btn-close { filter: invert(1); }
+
+/* ==========================================
+   FOOTER
+   ========================================== */
 footer {
-    background: var(--primary-pink);
-    color: white;
-    margin-top: 40px;
+    background-color: var(--primary-pink);
+    color: #fff;
+    margin-top: 0;
 }
 
-footer p {
-    margin: 0;
-}
+/* ==========================================
+   BG-LIGHT OVERRIDE FOR DARK MODE
+   ========================================== */
+body.dark-mode .bg-light { background-color: var(--bg-secondary) !important; }
 
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
 @media (max-width: 768px) {
-    .hero-section h1 {
-        font-size: 2rem;
-    }
-
-    .hero-section .lead {
-        font-size: 1.1rem;
-    }
-
-    .card {
-        margin-bottom: 15px;
-    }
+    .hero-section h1   { font-size: 2rem; }
+    .hero-section .lead { font-size: 1.1rem; }
 }
-
 @media (max-width: 576px) {
-    .hero-section {
-        padding: 50px 15px;
-    }
-
-    .hero-section h1 {
-        font-size: 1.5rem;
-    }
-
-    .card-body {
-        padding: 15px;
-    }
+    .hero-section { padding: 60px 15px; }
+    .hero-section h1 { font-size: 1.6rem; }
 }
