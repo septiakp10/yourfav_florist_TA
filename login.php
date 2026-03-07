@@ -1,42 +1,18 @@
 <?php
 session_start();
 
-$valid_users = [
-    'admin'    => 'florist123',
-];
-
+// Jika sudah login, langsung ke index
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     header('Location: index.php');
     exit;
 }
 
-$error = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username    = trim($_POST['username'] ?? '');
-    $password    = $_POST['password'] ?? '';
-    $remember_me = isset($_POST['remember_me']);
-
-    if ($username === '' || $password === '') {
-        $error = 'Username dan password tidak boleh kosong.';
-    } elseif (isset($valid_users[$username]) && $valid_users[$username] === $password) {
-        $_SESSION['logged_in'] = true;
-        $_SESSION['username']  = $username;
-
-        if ($remember_me) {
-            setcookie('remember_username', $username, time() + (30 * 24 * 60 * 60), '/');
-        } else {
-            setcookie('remember_username', '', time() - 3600, '/');
-        }
-
-        header('Location: index.php');
-        exit;
-    } else {
-        $error = 'Username atau password salah. Silakan coba lagi.';
-    }
-}
-
+// Ambil cookie remember me untuk pre-fill username
 $cookie_username = $_COOKIE['remember_username'] ?? '';
+
+// Ambil pesan error dari session (dikirim oleh proses_login.php)
+$error = $_SESSION['login_error'] ?? '';
+unset($_SESSION['login_error']); // Hapus setelah ditampilkan
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -46,10 +22,10 @@ $cookie_username = $_COOKIE['remember_username'] ?? '';
     <title>Login – YourFav Florist</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
     <style>
         body {
             background-color: #fff0f5;
-            font-family: 'Segoe UI', sans-serif;
         }
         .login-card {
             border: 1px solid #f5c6d0;
@@ -111,8 +87,8 @@ $cookie_username = $_COOKIE['remember_username'] ?? '';
             </div>
             <?php endif; ?>
 
-            <!-- Form -->
-            <form method="POST" action="login.php">
+            <!-- Form → action ke controller/proses_login.php -->
+            <form method="POST" action="controller/proses_login.php">
 
                 <div class="mb-3">
                     <label class="form-label fw-semibold" for="username">Username</label>

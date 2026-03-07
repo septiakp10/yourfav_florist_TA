@@ -1,13 +1,12 @@
 <?php
 session_start();
 
-// ── Session Guard: tolak akses jika belum login ──────────────
+// ── Session Guard ─────────────────────────────────────────────
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header('Location: login.php');
     exit;
 }
 
-// Ambil nama user yang login
 $username = htmlspecialchars($_SESSION['username']);
 ?>
 <!DOCTYPE html>
@@ -17,7 +16,6 @@ $username = htmlspecialchars($_SESSION['username']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YourFav Florist - Toko Buket Bunga Handmade</title>
 
-    <!-- Stok awal produk (referensi JS) -->
     <script>
         const STOK_AWAL = { '1': 15, '2': 12, '3': 18 };
     </script>
@@ -66,9 +64,10 @@ $username = htmlspecialchars($_SESSION['username']);
                         </span>
                     </li>
 
-                    <!-- Tombol Logout -->
+                    <!-- Tombol Logout → controller/logout.php -->
                     <li class="nav-item">
-                        <a href="logout.php" class="btn btn-sm btn-outline-secondary"
+                        <a href="controller/logout.php"
+                           class="btn btn-sm btn-outline-secondary"
                            onclick="return confirm('Yakin ingin logout?')"
                            title="Logout">
                             <i class="bi bi-box-arrow-right me-1"></i>Logout
@@ -258,9 +257,7 @@ $username = htmlspecialchars($_SESSION['username']);
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <ul class="list-group" id="daftar-wishlist">
-                        <!-- Diisi oleh JavaScript -->
-                    </ul>
+                    <ul class="list-group" id="daftar-wishlist"></ul>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
