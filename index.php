@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+// ── Session Guard: tolak akses jika belum login ──────────────
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: login.php');
+    exit;
+}
+
+// Ambil nama user yang login
+$username = htmlspecialchars($_SESSION['username']);
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -45,6 +57,22 @@
                             <i class="bi bi-heart-fill"></i> Favorit
                             <span class="badge bg-danger ms-1" id="wishlist-count">0</span>
                         </button>
+                    </li>
+
+                    <!-- Info User yang Login -->
+                    <li class="nav-item">
+                        <span class="navbar-text text-pink fw-semibold small">
+                            <i class="bi bi-person-circle me-1"></i><?= $username ?>
+                        </span>
+                    </li>
+
+                    <!-- Tombol Logout -->
+                    <li class="nav-item">
+                        <a href="logout.php" class="btn btn-sm btn-outline-secondary"
+                           onclick="return confirm('Yakin ingin logout?')"
+                           title="Logout">
+                            <i class="bi bi-box-arrow-right me-1"></i>Logout
+                        </a>
                     </li>
                 </ul>
             </div>
